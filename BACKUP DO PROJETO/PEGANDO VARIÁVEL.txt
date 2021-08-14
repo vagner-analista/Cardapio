@@ -1,0 +1,76 @@
+<!--
+                         <% if (message != '') { %>                           
+                          <div class="alert alert-danger" role="alert">
+                            <Strong>ERRO:</Strong><%= message %> 
+                          </div>
+                        <%}%> 
+
+                       --> 
+
+
+backup para pegar variável.
+
+
+
+
+ <% if( typeof listaCategoria != 'undefined') { %>                  
+                              <% locals.listaCategoria.forEach( (registros) => {  %>
+                                <p><%= registros.nomeCategoria %></p>
+                                
+                               <% }) %>
+                                                  
+                            <% } %>
+
+
+
+
+********** IF FÁCIL  COM EJS**********************
+<% if( typeof variavel!= 'undefined') { %>                  
+
+<% } %>
+
+
+**************** IF COM FOREACH*******************
+
+<% if( typeof variavel!= 'undefined') { %> 
+
+	<% locals.variavel.forEach( (registros) => {  %>
+		<p><%= registros.nomeCategoria %></p>                               
+	<% }) %>               
+
+<% } %>
+
+
+
+*************************************************BACKUP MENSAGEM COM ALERT DO BOOTSTRAP****************************************
+
+ <!--Mensagem de aviso-->
+                <% if( typeof aviso != 'undefined') { %>  
+                  <% aviso.forEach( (retornoAviso) => {  %>
+                           
+                    <div id="categoriaAviso" class="alert alert-warning alert-dismissible fade show" role="alert">
+                      <Strong>Aviso: </Strong><%= retornoAviso.msg %>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div> 
+                   <% }) %> 
+
+                <% } %>
+
+
+****************************disponibilizar função no front************************************
+
+
+function msgSucesso(){
+    locals.teste();
+   
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Categoria Salva com Sucesso!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+  app.locals.msgSucesso = msgSucesso;

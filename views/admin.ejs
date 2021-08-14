@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FRATELLI</title>
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+  <!--DATATABLE-->
+  <link href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/cssAdm.css">
+  <!-- Scripts (jQuery não pode ser o slim que vem do Boostrap) -->
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/bf7e05c402.js" crossorigin="anonymous"></script>
+  <!-- Progress Bar -->
+  <script src="js/progressbar.min.js"></script>
+
+  <!-- Parallax -->
+  <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container" id="nav-container">      
+      <nav class="navbar navbar-expand-lg fixed-top navbar-dark">        
+          <img id="logo" src="/img/hdcagency_logo.png" alt="Fratelli"> <strong>FRATELLI - Lanches e Pizza</strong>     
+          <h3 id="titleadm">ADMINISTRAÇÃO</h3>                  
+      </nav>
+    </div>
+  </header>
+  <main>
+      <div class="container-fluid">
+        <!--Cadastro-->
+        <div id="categoria-area">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">                
+                <div class="col-md-12">
+                  <!--Espaço para Menssagem do usuário-->
+                
+
+                <!--Mensagem de aviso-->
+                <% if( typeof aviso != 'undefined') { %>  
+                  <% aviso.forEach( (retornoAviso) => {  %>
+                           
+                    <div id="categoriaAviso" class="alert alert-warning alert-dismissible fade show" role="alert">
+                      <Strong>Aviso: </Strong><%= retornoAviso.msg %>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div> 
+                   <% }) %> 
+
+                <% } %>
+
+
+                <!--Mensagem de Sucesso-->
+                <% if( typeof sucesso != 'undefined') { %>          
+
+                    <script>                    
+                      alert('testa')
+                      msgSucesso();
+                    </script> 
+                                       
+                <% } %>
+
+                </div> 
+                <nav>
+                  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-usuario" role="tab" aria-controls="nav-home" aria-selected="true">Usuários</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-categoria" role="tab" aria-controls="nav-profile" aria-selected="false">Categoria</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-itens" role="tab" aria-controls="nav-contact" aria-selected="false">Itens do Cardápio</a>
+                  </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade show active" id="nav-usuario" role="tabpanel" aria-labelledby="nav-home-tab">                    
+                    <div class="card">
+                      <div class="card-header">
+                        <h3>Cadastro de Usuário</h3>
+                      </div>
+                      <div class="card-body">
+                        <br/>
+                        <form>
+                          <div class="form-group row">
+                            <label for="Nome" class="col-sm-2 col-form-label text-left">Nome Completo</label>
+                            <div class="col-sm-8">
+                              <input type="text" class="form-control" id="Nome" name="Nome" />
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="txt_login" class="col-sm-2 col-form-label text-left">Login</label>
+                            <div class="col-sm-6">
+                              <input type="text" class="form-control" id="txt_login" name="txt_login" />
+                            </div>
+                          </div>
+                          <div class="form-group row">                            
+                            <label for="cpf" class="col-sm-2 col-form-label text-left">CPF</label>                           
+                            <div class="col-sm-6">
+                              <input type="text" class="form-control" id="cpf" name="cpf">
+                            </div>
+                          </div>
+                          <div class="form-group row">                            
+                            <label for="perfil" class="col-sm-2 col-form-label text-left">Perfil</label>                           
+                            <div class="col-sm-6">
+                             <select name="perfil" id="perfil" class="form-control" placeholder="Selecione um Perfil">
+                              <option value="0">Selecione um perfil</option>
+                               <option value="1">Assistente</option>
+                               <option value="2">Admin</option>
+                             </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">                            
+                            <label for="email" class="col-sm-2 col-form-label text-left">E-mail</label>                           
+                            <div class="col-sm-6">
+                              <input type="text" class="form-control" id="email" name="email">
+                            </div>
+                          </div>
+                          <div class="form-group row">                            
+                            <label for="senha" class="col-sm-2 col-form-label text-left">Senha</label>                           
+                            <div class="col-sm-6">
+                              <input type="password" class="form-control" id="senha" name="senha">
+                            </div>
+                          </div>
+                          <div class="form-group row">                            
+                            <label for="senha" class="col-sm-2 col-form-label text-left"></label>                           
+                            <div class="col-sm-6">
+                              <br/>
+                              <button type="submit" class="btn btn-danger btn-block" id="btn_usuario" name="btn_usuario">Cadastrar Usuário</button>
+                            </div>
+                          </div>                     
+                        </form>
+                       
+                      </div>
+                    </div>                   
+                  </div>
+                  <div class="tab-pane fade" id="nav-categoria" role="tabpanel" aria-labelledby="nav-profile-tab">                    
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="card">
+                          <div class="card-header">
+                            <h3>Cadastro de Categoria</h3>
+                          </div>
+                          <div class="card-body">
+                            <br/> 
+                            <form method="POST" action="/gravarcategoria">
+                              <div class="form-group row">
+                                <label for="codcategoria" class="col-sm-3 col-form-label text-left">Código da Categoria</label>
+                                <div class="col-sm-1">
+                                  <input type="text" class="form-control" id="codcategoria" name="codcategoria" readonly/>
+                                </div>
+                              </div>                 
+                              <div class="form-group row">
+                                <label for="txt_nomeCategoria" class="col-sm-3 col-form-label text-left" readonly>Nome da Categoria</label>
+                                <div class="col-sm-8">
+                                  <input type="text" class="form-control" id="txt_nomeCategoria" name="txt_nomeCategoria" />
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="txt_descricaoCategoria" class="col-sm-3 col-form-label text-left" readonly>Descrição para a Categoria</label>
+                                <div class="col-sm-8">
+                                  <textarea name="txt_descricaoCategoria" id="txt_descricaoCategoria" class="form-control"></textarea>
+                                </div>
+                              </div>
+                              <div class="form-group row">                            
+                                <label for="btn_cadastrarCategoria" class="col-sm-3 col-form-label text-left"></label>                           
+                                <div class="col-sm-8">
+                                  <br/>
+                                  <button type="submit" class="btn btn-success btn-block" id="btn_cadastrarCategoria" name="btn_cadastrarCategoria">Cadastrar Categoria</button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>                          
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="card">
+                          <div class="card-header">
+                            <h3>Manutenção de Categoria</h3>
+                          </div>
+                          <div class="card-body">
+                            <div class="col-md-12">                              
+                                <a href="/buscarCategoria" class="btn btn-info btn-block" type="submit">Listar Categorias</a>                              
+                                <br/>
+                            </div>
+                            <div class="col-md-12">
+                              <table tablename="tb_categoria" id="tb_categoria" class="table table-striped table-bordered table-condensed">
+                                <thead>
+                                  <tr>
+                                    <td width='5%'>
+                                      <strong>ID CATEGORIA</strong>
+                                    </td>
+                                    <td  width='15%'>
+                                      <strong>NOME DA CATEGORIA</strong> 
+                                    </td>
+                                    <td  width='50%'>
+                                      <strong>DESCRIÇÃO DA CATEGORIA</strong>
+                                    </td>
+                                    <td  width='30%'>
+                                      <strong>OPERAÇÃO</strong>
+                                    </td>                                  
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <% if( typeof listaCategoria != 'undefined') { %>                  
+                                    <% locals.listaCategoria.forEach( (registros) => {  %>
+                                      <tr>
+                                        <td>                                        
+                                          <input type="text" name="txt_idCategoria" style="display: none;" id="txt_idCategoria" value="<%= registros.id %>" class="form-control"/>
+                                          <p><%= registros.id %></p>
+                                        </td>
+                                        <td>
+                                          <input type="text" name="txt_nmEditCategoria" style="display: none;" id="txt_nmEditCategoria" value="<%= registros.nomeCategoria %>" class="form-control"/>
+                                          <p><%= registros.nomeCategoria %></p>
+                                        </td>
+                                        <td>
+                                          <textarea name="ta_editDescCategoria"         style="display: none;" id="ta_editDescCategoria"  class="form-control"> registros.descricaoCategoria</textarea>
+                                          <p><%= registros.descricaoCategoria %></p>
+                                        </td>
+                                        <td>
+                                          <!--<i class="fa fa-pencil-square-o" aria-hidden="true"  value="<%= registros.id %>" onclick="editarRegistro('<%= registros.id %>');"></i>-->
+                                          <button class="btn btn-warning" name="btnEditarCategoria" id="btnEditarCategoria">Editar</button>
+                                          <button class="btn btn-danger " name="btnDelCategoria" id="btnDelCategoria">Excluir</button>
+                                        </td>
+                                     
+                                      </tr>
+                                      
+                                     <% }) %>
+                                                        
+                                  <% } %>                                
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                         
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="nav-itens" role="tabpanel" aria-labelledby="nav-contact-tab">
+                   <div class="card">
+                     <div class="card-header">
+                       <h3>Cadastro de itens do cardápio</h3>
+                     </div>
+                     <div class="card-body"> 
+                      <br/>                     
+                      <form>
+                        <div class="form-group row">
+                          <label for="txt_id" class="col-sm-2 col-form-label text-left" >Identificador</label>
+                          <div class="col-sm-1">
+                            <input type="text" class="form-control" id="txt_id" name="txt_id" readonly/>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="idcategoria" class="col-sm-2 col-form-label text-left" readonly>Categoria</label>
+                          <div class="col-sm-3">
+                            <select class="form-control" id="idcategoria" name="idcategoria">
+                              <option value="0">Selecione uma categoria</option>
+                              <option value="1">Prazos</option>
+                              <option value="2">Bebidas</option>
+                              <option value="3">Prazos</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="txt_statusItem" class="col-sm-2 col-form-label text-left" >Status</label>
+                          <div class="col-sm-3">
+                           <select name="sl_status" id="sl_status" class="form-control">
+                             <option value="0">Selecione um status</option>
+                             <option value="1">Inativo</option>
+                             <option value="2">Ativo</option>
+                           </select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="txt_item" class="col-sm-2 col-form-label text-left" >Nome</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control" id="txt_item" name="txt_item" />
+                          </div>
+                        </div>                        
+                        <div class="form-group row">
+                          <label for="ta_desc" class="col-sm-2 col-form-label text-left" >Descrição do Item</label>
+                          <div class="col-sm-8">
+                            <textarea  class="form-control" id="ta_desc" name="ta_desc" rows="5" placeholder="Descrever detalhadamente a descrição para o cliente"></textarea>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-2 col-form-label text-left" ></label>
+                          <div class="col-sm-8">                            
+                              <label class="custom-file-upload">
+                                <input type="file"/>
+                                <i class="fa fa-upload" aria-hidden="true">                                 
+                                </i>
+                                &nbsp; Escolher foto                               
+                              </label> 
+                          </div>
+                        </div>
+                        <div class="form-group row">                            
+                          <label for="btn_cadastrarCategoria" class="col-sm-2 col-form-label text-left"></label>                           
+                          <div class="col-sm-8">
+                            <br/>
+                            <button type="submit" class="btn btn-danger btn-block" id="btn_cadastrarItens" name="btn_cadastrarItens">Cadastrar Menu do Cardápio</button>
+                          </div>
+                        </div>
+                      </form>  
+                     </div>
+                   </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>         
+    </main>
+  <!-- Scripts do projeto -->
+  <!--CUSTOM JS-->
+  <script src="js/script_adm.js"></script>  
+  <!--SWEETALERT-->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+  <!--DATATABLE-->
+  <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+</body>
+</html>
